@@ -3,8 +3,39 @@
     <h2>Vue Datagrid</h2>
   </div>
   <div class="container">
+    <div class="distinctRecords">
+      <input
+        type="text"
+        class="searchBar"
+        placeholder="Enter value..."
+        v-model="searchText"
+      />
+      <div>
+        <input
+          type="checkbox"
+          id="selectAll"
+          @click="selectAll"
+          v-model="allSelected"
+        />
+        <label for="selectAll">Select All</label>
+      </div>
+      <div v-for="(data, index) in filteredResources" :key="index">
+        <input
+          type="checkbox"
+          :id="data"
+          :value="data"
+          v-model="selected"
+          @click="select"
+        />
+        <label :for="data">{{ data }}</label>
+      </div>
+      <button class="filterBtn" @click="filterData">Apply</button>
+      <!-- Cancel button to close the panel -->
+    </div>
     <div class="grid">
-      <v-grid :source="data" :columns="columns" filter="true"></v-grid>
+      <template v-for="(data, index) in filterData" :key="index">
+        <v-grid :source="data" :columns="columns" filter="true"></v-grid>
+      </template>
     </div>
   </div>
 </template>
@@ -17,7 +48,12 @@ export default {
   name: "App",
   data() {
     return {
-      data: Data,
+      Data: Data,
+      copyData: Data,
+      searchText: "",
+      picked: "first_name",
+      selected: [],
+      allSelected: true,
       columns: [
         {
           name: "ID",
@@ -114,6 +150,51 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.distinctData();
+  },
+  computed: {
+    filteredResources() {
+      if (this.searchText) {
+        return this.copyData
+          .filter((item) =>
+            item[this.picked]
+              .toLowerCase()
+              .includes(this.searchText.toLowerCase())
+          )
+          .map((item) => item[this.picked]);
+      } else {
+        return this.copyData.map((item) => item[this.picked]);
+      }
+    },
+    filterData() {
+      this.data = [];
+      let details = this.Data.filter((data) =>
+        this.selected.includes(data[this.picked])
+      );
+      this.data.push(details);
+      return this.data;
+    },
+    selectAll() {
+      this.selected = [];
+      if (!this.allSelected) {
+        for (let key in this.copyData) {
+          var obj = this.copyData[key];
+          this.selected.push(obj[this.picked]);
+        }
+      }
+    },
+  },
+  methods: {
+    distinctData() {
+      this.selected = [
+        ...new Set(this.copyData.map((item) => item[this.picked])),
+      ];
+    },
+    select() {
+      this.allSelected = false;
+    },
+  },
   components: {
     VGrid,
   },
@@ -158,8 +239,20 @@ html {
 .grid {
   height: 80%;
   padding: 10px;
-  background: #fff;
   width: auto;
   overflow: auto;
+  background: white;
+}
+.searchBar {
+  border: black 2px solid;
+  padding: 0.15rem 0.5rem;
+}
+.distinctRecords {
+  background: rgb(152, 152, 152);
+  height: 80%;
+  overflow: auto;
+}
+.distinctRecords input {
+  margin: 5px;
 }
 </style>
