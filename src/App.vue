@@ -23,32 +23,93 @@ export default {
           name: "ID",
           prop: "id",
           columnType: "number",
+          sortable: true,
+          columnProperties: ({ prop, model, data, column }) => {
+            return {
+              style: {
+                color: "aliceblue",
+                fontWeight: "bold",
+                backgroundColor: "blue",
+              },
+            };
+          },
         },
         {
           name: "Name",
           prop: "first_name",
           columnType: "string",
+          sortable: true,
+          columnProperties: ({ prop, model, data, column }) => {
+            return {
+              style: {
+                color: "aliceblue",
+                fontWeight: "bold",
+                backgroundColor: "blue",
+              },
+            };
+          },
         },
         {
           name: "Email",
           prop: "email",
           columnType: "email",
           size: 250,
+          sortable: true,
+          columnProperties: ({ prop, model, data, column }) => {
+            return {
+              style: {
+                color: "aliceblue",
+                fontWeight: "bold",
+                backgroundColor: "blue",
+              },
+            };
+          },
         },
         {
           name: "Phone",
           prop: "phone",
           columnType: "number",
+          sortable: true,
+          columnProperties: ({ prop, model, data, column }) => {
+            return {
+              style: {
+                color: "aliceblue",
+                fontWeight: "bold",
+                backgroundColor: "blue",
+              },
+            };
+          },
         },
         {
           name: "Gender",
           prop: "gender",
           columnType: "string",
+          sortable: true,
+          columnProperties: ({ prop, model, data, column }) => {
+            return {
+              style: {
+                color: "aliceblue",
+                fontWeight: "bold",
+                backgroundColor: "blue",
+              },
+            };
+          },
         },
         {
           name: "IP Address",
           prop: "ip_address",
+          size: 200,
           columnType: "number",
+          sortable: true,
+          columnProperties: ({ prop, model, data, column }) => {
+            return {
+              style: {
+                color: "aliceblue",
+                fontWeight: "bold",
+                backgroundColor: "blue",
+              },
+            };
+          },
         },
       ],
     };
