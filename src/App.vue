@@ -4,6 +4,15 @@
   </div>
   <div class="container">
     <div class="distinctRecords">
+      <select id="select" v-model="picked">
+        <option disabled value="">Select a property...</option>
+        <option value="id">ID</option>
+        <option value="first_name">Name</option>
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+        <option value="gender">Gender</option>
+        <option value="ip_address">IP Address</option>
+      </select>
       <input
         type="text"
         class="searchBar"
@@ -241,18 +250,43 @@ html {
   padding: 10px;
   width: auto;
   overflow: auto;
-  background: white;
+  background: aliceblue;
 }
 .searchBar {
   border: black 2px solid;
   padding: 0.15rem 0.5rem;
+  background: aliceblue;
 }
 .distinctRecords {
+  display: flex;
+  flex-direction: column;
   background: rgb(152, 152, 152);
   height: 80%;
   overflow: auto;
 }
 .distinctRecords input {
   margin: 5px;
+}
+#select {
+  border: black 2px solid;
+  background: aliceblue;
+  padding: 0.15rem 0.5rem;
+  margin: 5px 5px 0 5px;
+}
+.filterBtn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  color: antiquewhite;
+  background: #6e29dc;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 0.5rem;
+}
+.filterBtn:hover {
+  opacity: 0.9;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background: #5d1eca;
 }
 </style>
