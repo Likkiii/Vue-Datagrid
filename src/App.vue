@@ -165,15 +165,19 @@ export default {
   computed: {
     filteredResources() {
       if (this.searchText) {
-        return this.copyData
+        let details = this.copyData
           .filter((item) =>
             item[this.picked]
               .toLowerCase()
               .includes(this.searchText.toLowerCase())
           )
           .map((item) => item[this.picked]);
+        this.selected = details;
+        return details;
       } else {
-        return this.copyData.map((item) => item[this.picked]);
+        let dataDetails = this.copyData.map((item) => item[this.picked]);
+        this.selected = dataDetails;
+        return dataDetails;
       }
     },
     filterData() {
