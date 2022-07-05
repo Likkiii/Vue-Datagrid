@@ -43,7 +43,13 @@
     </div>
     <div class="grid">
       <template v-for="(data, index) in filterData" :key="index">
-        <v-grid :source="data" :columns="columns" filter="true"></v-grid>
+        <v-grid
+          :source="data"
+          :columns="columns"
+          filter="true"
+          resize="true"
+          exporting="true"
+        ></v-grid>
       </template>
     </div>
   </div>
@@ -69,6 +75,7 @@ export default {
           prop: "id",
           columnType: "number",
           sortable: true,
+          pin: "colPinStart",
           columnProperties: ({ prop, model, data, column }) => {
             return {
               style: {
